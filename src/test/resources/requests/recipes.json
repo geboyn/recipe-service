@@ -1,0 +1,54 @@
+[
+  {
+    "description": "hamburger",
+    "recipeType": "standard",
+    "instructions": "Put in the microwave for 3 minutes at 700W",
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "potatos",
+        "quantity": "500 grams"
+      },
+      {
+        "name": "pork",
+        "quantity": "300 grams"
+      }
+    ]
+  },
+  {
+    "description": "fries with onion",
+    "recipeType": "VEGETARIAN",
+    "instructions": "Bake me",
+    "servings": 4,
+    "ingredients": [
+      {
+        "name": "potatos",
+        "quantity": "500 grams"
+      },
+      {
+        "name": "onion",
+        "quantity": "300 grams"
+      }
+    ]
+  },
+  {
+    "description": "Meat plate",
+    "recipeType": "Standard",
+    "instructions": "Put everything on the plate",
+    "servings": 3,
+    "ingredients": [
+      {
+        "name": "fish",
+        "quantity": "500 grams"
+      },
+      {
+        "name": "pork",
+        "quantity": "300 grams"
+      },
+      {
+        "name": "bread",
+        "quantity": "2"
+      }
+    ]
+  }
+]

@@ -3,7 +3,6 @@ package com.gnica.recipe.helper;
 import com.gnica.recipe.dto.IngredientDto;
 import com.gnica.recipe.dto.InputRecipeDto;
 import com.gnica.recipe.dto.RecipeType;
-
 import java.util.Set;
 
 public class RecipeDataFactory {

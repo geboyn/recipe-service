@@ -1,13 +1,16 @@
 package com.gnica.recipe.exception.pojo;
 
 import com.gnica.recipe.dto.RecipeType;
-import lombok.Getter;
 
 import java.util.Arrays;
 
+import lombok.Getter;
+
+/**
+ * The errors returned by the api
+ */
 @Getter
 public enum Errors {
-
     RECIPE_NOT_FOUND("RS_001", "Could not find recipe"),
     INVALID_RECIPE_TYPE("RS_002", "Invalid recipe type. Supported types are: " + Arrays.toString(RecipeType.values()));
 

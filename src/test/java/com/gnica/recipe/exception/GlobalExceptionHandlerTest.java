@@ -1,11 +1,17 @@
-/*
 package com.gnica.recipe.exception;
 
+import static com.gnica.recipe.exception.pojo.Errors.INVALID_RECIPE_TYPE;
+import static com.gnica.recipe.exception.pojo.Errors.RECIPE_NOT_FOUND;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnica.recipe.dto.InputRecipeDto;
 import com.gnica.recipe.exception.pojo.ApiError;
-import com.gnica.recipe.helper.RecipeDataFactory;
 import com.gnica.recipe.service.RecipeService;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
+import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,19 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-
-import static com.gnica.recipe.exception.pojo.Errors.INVALID_RECIPE_TYPE;
-import static com.gnica.recipe.exception.pojo.Errors.RECIPE_NOT_FOUND;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,7 +41,8 @@ class GlobalExceptionHandlerTest {
     void shouldHandleRecipeNotFoundException() throws Exception {
         // given
         var id = UUID.randomUUID();
-        when(recipeService.findById(id)).thenThrow(new RecipeNotFoundException(RECIPE_NOT_FOUND.getErrorCode(), RECIPE_NOT_FOUND.getMessage()));
+        when(recipeService.findById(id))
+                .thenThrow(new RecipeNotFoundException(RECIPE_NOT_FOUND.getErrorCode(), RECIPE_NOT_FOUND.getMessage()));
 
         // then
         var mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/recipes/{id}", id.toString())
@@ -68,8 +62,9 @@ class GlobalExceptionHandlerTest {
     @DisplayName("Test handling InvalidRecipeType")
     @Test
     void shouldHandleInvalidRecipeType() throws Exception {
-        String request = IOUtils.toString(Objects.requireNonNull(this.getClass().getResource("/requests/invalid-request.json")), StandardCharsets.UTF_8);
-
+        String request = IOUtils.toString(
+                Objects.requireNonNull(this.getClass().getResource("/requests/invalid-request.json")),
+                StandardCharsets.UTF_8);
 
         // then
         var mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/recipes")
@@ -86,4 +81,4 @@ class GlobalExceptionHandlerTest {
         assertEquals(INVALID_RECIPE_TYPE.getErrorCode(), result.getErrorCode());
         assertEquals(INVALID_RECIPE_TYPE.getMessage(), result.getMessage());
     }
-}*/
+}

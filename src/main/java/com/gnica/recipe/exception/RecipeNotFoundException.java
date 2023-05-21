@@ -12,5 +12,4 @@ public class RecipeNotFoundException extends ServiceException {
         super(name, message);
         this.httpStatus = HttpStatus.NOT_FOUND;
     }
-
 }

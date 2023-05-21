@@ -1,23 +1,22 @@
 package com.gnica.recipe.mapper;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import com.gnica.recipe.dto.IngredientDto;
 import com.gnica.recipe.dto.InputRecipeDto;
 import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.entity.Ingredient;
 import com.gnica.recipe.entity.Recipe;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {RecipeMapperImpl.class})
@@ -42,19 +41,25 @@ class RecipeMapperTest {
         assertEquals(inputRecipeDto.getInstructions(), entity.getInstructions());
         assertEquals(inputRecipeDto.getServings(), entity.getServings());
 
-        assertArrayEquals(entity.getIngredients().stream()
-                .map(Ingredient::getName)
-                .sorted()
-                .toArray(), inputRecipeDto.getIngredients().stream()
-                .map(IngredientDto::getName)
-                .sorted().toArray());
+        assertArrayEquals(
+                entity.getIngredients().stream()
+                        .map(Ingredient::getName)
+                        .sorted()
+                        .toArray(),
+                inputRecipeDto.getIngredients().stream()
+                        .map(IngredientDto::getName)
+                        .sorted()
+                        .toArray());
 
-        assertArrayEquals(entity.getIngredients().stream()
-                .map(Ingredient::getQuantity)
-                .sorted()
-                .toArray(), inputRecipeDto.getIngredients().stream()
-                .map(IngredientDto::getQuantity)
-                .sorted().toArray());
+        assertArrayEquals(
+                entity.getIngredients().stream()
+                        .map(Ingredient::getQuantity)
+                        .sorted()
+                        .toArray(),
+                inputRecipeDto.getIngredients().stream()
+                        .map(IngredientDto::getQuantity)
+                        .sorted()
+                        .toArray());
     }
 
     @DisplayName("RecipeEntity is mapped successfully to RecipeDto")
@@ -85,7 +90,6 @@ class RecipeMapperTest {
         assertEquals(recipes.get(0).getId(), result.get(0).getId());
         assertEquals(recipes.get(0).getDescription(), result.get(0).getDescription());
     }
-
 
     private InputRecipeDto createInputRecipeDto() {
         var inputRecipeDto = new InputRecipeDto();

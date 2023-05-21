@@ -1,7 +1,18 @@
 package com.gnica.recipe.api.v1.controller;
 
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gnica.recipe.dto.RecipeDto;
 import com.gnica.recipe.helper.RecipeDataFactory;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +20,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.List;
-import java.util.UUID;
-
-import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -31,12 +32,13 @@ class RecipeControllerTest {
     @Test
     void shouldReturnEmptyList() throws Exception {
 
-        this.mockMvc.perform(get("/recipes"))
+        this.mockMvc
+                .perform(get("/recipes"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(is("[]")));
     }
 
-    @DisplayName("Create recipe successfully")
+    @DisplayName("Create and retrieve recipe successfully")
     @Test
     void shouldSaveRecipe() throws Exception {
         var testInputRecipeDto = List.of(RecipeDataFactory.createTestInputRecipeDto());
@@ -44,7 +46,18 @@ class RecipeControllerTest {
 
         var request = objectMapper.writeValueAsString(testInputRecipeDto);
 
-        this.mockMvc.perform(post("/recipes")
+        String contentAsString = this.mockMvc
+                .perform(
+                        post("/recipes").contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        List<RecipeDto> recipes = objectMapper.readValue(contentAsString, new TypeReference<List<RecipeDto>>() {});
+
+        this.mockMvc
+                .perform(get("/recipes/{id}", recipes.get(0).getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(request))
                 .andExpect(status().isOk());
@@ -54,8 +67,6 @@ class RecipeControllerTest {
     @Test
     void shouldDeleteRecipe() throws Exception {
         var id = UUID.randomUUID();
-        this.mockMvc.perform(delete("/recipes/{id}", id.toString()))
-                .andExpect(status().isAccepted());
+        this.mockMvc.perform(delete("/recipes/{id}", id.toString())).andExpect(status().isAccepted());
     }
-
 }

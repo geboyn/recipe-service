@@ -3,9 +3,8 @@ package com.gnica.recipe.search.parser;
 import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.search.SearchRequest;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
 
 public class SearchRequestParser {
 
@@ -13,7 +12,7 @@ public class SearchRequestParser {
 
         var searchRequest = SearchRequest.builder().build();
 
-        var recipeType = request.getParameter("recipe-type");
+        var recipeType = request.getParameter("recipeType");
         if (recipeType != null) {
             searchRequest.setRecipeType(RecipeType.getValue(recipeType));
         }
@@ -34,7 +33,7 @@ public class SearchRequestParser {
             searchRequest.setIngredients(Set.of(ingredients));
         }
 
-        String[] ingredientsExcluded = request.getParameterValues("ingredients-exclude");
+        String[] ingredientsExcluded = request.getParameterValues("ingredientsExclude");
         if (ingredientsExcluded != null) {
             searchRequest.setIngredientsExclude(Set.of(ingredientsExcluded));
         }

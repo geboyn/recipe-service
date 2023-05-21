@@ -5,15 +5,14 @@ import com.gnica.recipe.dto.RecipeDto;
 import com.gnica.recipe.search.parser.SearchRequestParser;
 import com.gnica.recipe.service.RecipeService;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,11 +21,10 @@ public class RecipeController implements RecipeApi {
 
     private final RecipeService recipeService;
 
-    public ResponseEntity<List<RecipeDto>> getRecipes(HttpServletRequest request) {
-
+    @Override
+    public ResponseEntity<List<RecipeDto>> allRecipes(HttpServletRequest request) {
         var searchRequestParser = new SearchRequestParser();
         var searchRequest = searchRequestParser.parseRequest(request);
-
         var recipes = recipeService.findByCriteria(searchRequest);
 
         return ResponseEntity.ok(recipes);
@@ -39,7 +37,6 @@ public class RecipeController implements RecipeApi {
         return ResponseEntity.ok(recipe);
     }
 
-
     @Override
     public ResponseEntity<List<RecipeDto>> saveRecipes(@RequestBody List<InputRecipeDto> inputRecipeDto) {
         var recipeDto = recipeService.saveRecipes(inputRecipeDto);
@@ -47,7 +44,7 @@ public class RecipeController implements RecipeApi {
         return ResponseEntity.ok(recipeDto);
     }
 
-
+    @Override
     public ResponseEntity<Void> deleteRecipe(@PathVariable UUID id) {
         recipeService.deleteById(id);
 
