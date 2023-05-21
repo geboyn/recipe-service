@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 class RecipeApplicationTests {
 
-	@Autowired
-	private RecipeService recipeService;
+    @Autowired
+    private RecipeService recipeService;
 
-	@Test
-	void contextLoads() {
-		assertNotNull(recipeService);
-	}
+    @Test
+    void contextLoads() {
+        assertNotNull(recipeService);
+    }
 
 }

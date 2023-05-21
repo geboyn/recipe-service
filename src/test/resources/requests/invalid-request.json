@@ -1,0 +1,18 @@
+[
+  {
+    "description": "steak",
+    "recipeType": "steak lovers",
+    "instructions": "Just Do it!",
+    "numberOfServings": 4,
+    "ingredients": [
+      {
+        "name": "potatos",
+        "quantity": "500 grams"
+      },
+      {
+        "name": "pork",
+        "quantity": "300 grams"
+      }
+    ]
+  }
+]

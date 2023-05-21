@@ -9,9 +9,14 @@ spring:
       enabled: true
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
       dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
   flyway:
     locations: classpath:db/migration
     enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE

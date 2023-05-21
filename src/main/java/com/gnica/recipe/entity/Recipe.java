@@ -5,6 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -22,7 +24,6 @@ public class Recipe {
     @Column(name = "description")
     private String description;
 
-    //@Enumerated(EnumType.STRING)
     @Column(name = "recipe_type")
     private String recipeType;
 
@@ -30,8 +31,12 @@ public class Recipe {
     private String instructions;
 
     @Column(name = "number_of_servings")
-    private int numberOfServings;
+    private Integer servings;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "t_recipe_ingredients",
+            joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"
+            ))
     private Set<Ingredient> ingredients;
 }

@@ -12,6 +12,8 @@ public interface RecipeMapper {
 
     Recipe toEntity(InputRecipeDto source);
 
+    List<Recipe> toEntities(List<InputRecipeDto> source);
+
 
     RecipeDto fromEntity(Recipe recipe);
 

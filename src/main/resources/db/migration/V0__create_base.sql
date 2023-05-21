@@ -21,7 +21,7 @@ CREATE TABLE t_recipe_ingredients
 (
     recipe_id uuid NOT NULL,
     ingredient_id uuid NOT NULL,
-    CONSTRAINT t_recipe_ingredient_pkey PRIMARY KEY (recipe_id, ingredient_id),
+    CONSTRAINT t_recipe_ingredients_pkey PRIMARY KEY (recipe_id, ingredient_id),
     CONSTRAINT fk_recipe_ingredient_recipe FOREIGN KEY (recipe_id)
         REFERENCES t_recipe (id),
     CONSTRAINT fk_recipe_ingredient_ingredient FOREIGN KEY (ingredient_id)

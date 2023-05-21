@@ -2,6 +2,7 @@ package com.gnica.recipe.mapper;
 
 import com.gnica.recipe.dto.IngredientDto;
 import com.gnica.recipe.dto.InputRecipeDto;
+import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.entity.Ingredient;
 import com.gnica.recipe.entity.Recipe;
 import org.junit.jupiter.api.DisplayName;
@@ -39,7 +40,7 @@ class RecipeMapperTest {
         assertEquals(inputRecipeDto.getDescription(), entity.getDescription());
         assertEquals(inputRecipeDto.getRecipeType().name(), entity.getRecipeType());
         assertEquals(inputRecipeDto.getInstructions(), entity.getInstructions());
-        assertEquals(inputRecipeDto.getNumberOfServings(), entity.getNumberOfServings());
+        assertEquals(inputRecipeDto.getServings(), entity.getServings());
 
         assertArrayEquals(entity.getIngredients().stream()
                 .map(Ingredient::getName)
@@ -88,10 +89,10 @@ class RecipeMapperTest {
 
     private InputRecipeDto createInputRecipeDto() {
         var inputRecipeDto = new InputRecipeDto();
-        inputRecipeDto.setRecipeType(InputRecipeDto.RecipeType.VEGETARIAN);
+        inputRecipeDto.setRecipeType(RecipeType.VEGETARIAN);
         inputRecipeDto.setDescription("French fries");
         inputRecipeDto.setInstructions("Just do it!");
-        inputRecipeDto.setNumberOfServings(3);
+        inputRecipeDto.setServings(3);
 
         var ingredientDto = new IngredientDto();
         ingredientDto.setName("fries");
@@ -105,7 +106,7 @@ class RecipeMapperTest {
         var recipe = new Recipe();
         recipe.setId(UUID.randomUUID());
         recipe.setDescription("Fries");
-        recipe.setRecipeType(InputRecipeDto.RecipeType.VEGETARIAN.toString());
+        recipe.setRecipeType(RecipeType.VEGETARIAN.toString());
 
         return recipe;
     }
