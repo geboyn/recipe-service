@@ -93,7 +93,7 @@ class RecipeServiceTest {
                 SearchRequest.builder().recipeType(RecipeType.VEGETARIAN).build();
 
         // then the vegetarian recipe is returned
-        var recipes = recipeService.findByCriteria(searchRequest);
+        var recipes = recipeService.filterRecipes(searchRequest);
 
         assertEquals(1, recipes.size());
         assertEquals(RecipeType.VEGETARIAN.name(), recipes.get(0).getRecipeType());
@@ -113,7 +113,7 @@ class RecipeServiceTest {
                 .build();
 
         // then the correct recipe is returned
-        var recipes = recipeService.findByCriteria(searchRequest);
+        var recipes = recipeService.filterRecipes(searchRequest);
 
         assertEquals(1, recipes.size());
 

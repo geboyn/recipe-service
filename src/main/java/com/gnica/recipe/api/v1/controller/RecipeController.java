@@ -23,31 +23,31 @@ public class RecipeController implements RecipeApi {
 
     @Override
     public ResponseEntity<List<RecipeDto>> allRecipes(HttpServletRequest request) {
+
         var searchRequestParser = new SearchRequestParser();
         var searchRequest = searchRequestParser.parseRequest(request);
-        var recipes = recipeService.findByCriteria(searchRequest);
-
+        var recipes = recipeService.filterRecipes(searchRequest);
         return ResponseEntity.ok(recipes);
     }
 
     @Override
     public ResponseEntity<RecipeDto> getRecipe(UUID id) {
-        var recipe = recipeService.findById(id);
 
+        var recipe = recipeService.findById(id);
         return ResponseEntity.ok(recipe);
     }
 
     @Override
     public ResponseEntity<List<RecipeDto>> saveRecipes(@RequestBody List<InputRecipeDto> inputRecipeDto) {
-        var recipeDto = recipeService.saveRecipes(inputRecipeDto);
 
+        var recipeDto = recipeService.saveRecipes(inputRecipeDto);
         return ResponseEntity.ok(recipeDto);
     }
 
     @Override
     public ResponseEntity<Void> deleteRecipe(@PathVariable UUID id) {
-        recipeService.deleteById(id);
 
+        recipeService.deleteById(id);
         return ResponseEntity.accepted().build();
     }
 }
