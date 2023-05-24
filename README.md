@@ -11,12 +11,15 @@ an in memory database (h2) and for the advanced filtering I chose Spring Jpa Spe
 
 ## Running the application
 
-- build: ```mvn clean install ```
+- build:
+  - ```mvn spotless:apply```
+  - ```mvn clean install ```
 - run:
   - cd target && java -jar recipe-0.0.1-SNAPSHOT.jar --spring.profiles.active=local
   - mvn spring-boot:run -Dspring-boot.run.profiles=local
 - run with docker:
   - build image ``` docker build . -t recipe-service```
+  - run ```docker run -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=local" recipe-service```
 
 ## Usage examples
 
