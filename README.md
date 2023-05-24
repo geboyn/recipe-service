@@ -1,5 +1,8 @@
 # Recipe Service
 
+The application has been built using Spring Boot in java 17. To keep things easier to set up, I have used
+an in memory database (h2) and for the advanced filtering I chose Spring Jpa Specification.
+
 ## Requirements
 
 - java 17
@@ -49,5 +52,5 @@ More examples can be found in the documentation section
 
 ## Documentation:
 
-Swagger: http://localhost:8080/swagger-ui/index.html#/
+- Run the application and go to Swagger: http://localhost:8080/swagger-ui/index.html#/
 
