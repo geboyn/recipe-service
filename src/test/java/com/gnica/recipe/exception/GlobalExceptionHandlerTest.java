@@ -1,5 +1,6 @@
 package com.gnica.recipe.exception;
 
+import static com.gnica.recipe.exception.pojo.Errors.INVALID_PARAMETER;
 import static com.gnica.recipe.exception.pojo.Errors.INVALID_RECIPE_TYPE;
 import static com.gnica.recipe.exception.pojo.Errors.RECIPE_NOT_FOUND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,5 +81,23 @@ class GlobalExceptionHandlerTest {
 
         assertEquals(INVALID_RECIPE_TYPE.getErrorCode(), result.getErrorCode());
         assertEquals(INVALID_RECIPE_TYPE.getMessage(), result.getMessage());
+    }
+
+    @DisplayName("Test handling ethodArgumentTypeMismatchException")
+    @Test
+    void shouldHandleMethodArgumentTypeMismatchException() throws Exception {
+        // then
+        var mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/recipes")
+                        .param("servings", "jkdnas")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
+                .andReturn();
+
+        // and
+        var response = mvcResult.getResponse().getContentAsString();
+
+        var result = objectMapper.readValue(response, ApiError.class);
+
+        assertEquals(INVALID_PARAMETER.getErrorCode(), result.getErrorCode());
     }
 }

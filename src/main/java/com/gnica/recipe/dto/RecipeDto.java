@@ -8,8 +8,8 @@ import lombok.Data;
 public class RecipeDto {
 
     private UUID id;
-    private String description;
-    private String recipeType;
+    private String name;
+    private String type;
     private String instructions;
     private Integer servings;
     private List<IngredientDto> ingredients;

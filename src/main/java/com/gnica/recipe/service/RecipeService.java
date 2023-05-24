@@ -38,6 +38,26 @@ public class RecipeService {
     }
 
     @Transactional
+    public RecipeDto saveRecipe(InputRecipeDto inputRecipeDto) {
+        var entity = mapper.toEntity(inputRecipeDto);
+        var savedEntity = recipeRepository.save(entity);
+
+        return mapper.fromEntity(savedEntity);
+    }
+
+    @Transactional
+    public RecipeDto updateRecipe(UUID id, InputRecipeDto inputRecipeDto) {
+
+        return recipeRepository
+                .findById(id)
+                .map(recipe -> createRecipeEntity(id, inputRecipeDto))
+                .map(recipeRepository::save)
+                .map(mapper::fromEntity)
+                .orElseThrow(() ->
+                        new RecipeNotFoundException(RECIPE_NOT_FOUND.getErrorCode(), RECIPE_NOT_FOUND.getMessage()));
+    }
+
+    @Transactional
     public RecipeDto findById(UUID id) {
         return recipeRepository
                 .findById(id)
@@ -50,7 +70,7 @@ public class RecipeService {
     public List<RecipeDto> filterRecipes(SearchRequest searchRequest) {
 
         Specification<Recipe> specs = Specification.where(withIngredients(searchRequest.getIngredients()))
-                .and(doesNotContainIngredients(searchRequest.getIngredientsExclude()))
+                .and(doesNotContainIngredients(searchRequest.getIngredientsToExclude()))
                 .and(withRecipeType(searchRequest.getRecipeType()))
                 .and(withServings(searchRequest.getServings()))
                 .and(withInstructions(searchRequest.getInstructions()));
@@ -62,5 +82,12 @@ public class RecipeService {
 
     public void deleteById(UUID id) {
         recipeRepository.deleteById(id);
+    }
+
+    private Recipe createRecipeEntity(UUID id, InputRecipeDto inputRecipeDto) {
+        var entity = mapper.toEntity(inputRecipeDto);
+        entity.setId(id);
+
+        return entity;
     }
 }

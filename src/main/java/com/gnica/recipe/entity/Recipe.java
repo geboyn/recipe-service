@@ -21,11 +21,11 @@ public class Recipe {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "recipe_type")
-    private String recipeType;
+    @Column(name = "type")
+    private String type;
 
     @Column(name = "instructions")
     private String instructions;

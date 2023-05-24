@@ -13,5 +13,5 @@ public class SearchRequest {
     private Integer servings;
     private String instructions;
     private Set<String> ingredients;
-    private Set<String> ingredientsExclude;
+    private Set<String> ingredientsToExclude;
 }

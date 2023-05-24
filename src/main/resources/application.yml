@@ -4,14 +4,12 @@ jdbc:
 spring:
   datasource:
     url:
-  h2:
-    console:
-      enabled: true
+
   jpa:
     hibernate:
       ddl-auto: none
       dialect: org.hibernate.dialect.H2Dialect
-    show-sql: true
+
   flyway:
     locations: classpath:db/migration
     enabled: true

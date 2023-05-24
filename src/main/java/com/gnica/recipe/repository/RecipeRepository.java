@@ -65,7 +65,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, UUID>, JpaSpecif
         static Specification<Recipe> withRecipeType(RecipeType recipeType) {
             if (recipeType != null) {
                 return (root, query, criteriaBuilder) ->
-                        criteriaBuilder.and(criteriaBuilder.equal(root.get("recipeType"), recipeType.toString()));
+                        criteriaBuilder.and(criteriaBuilder.equal(root.get("type"), recipeType.toString()));
             }
             return null;
         }

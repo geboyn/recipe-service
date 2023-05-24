@@ -36,8 +36,8 @@ class RecipeMapperTest {
         var entity = mapper.toEntity(inputRecipeDto);
 
         // then the fields are mapped correctly
-        assertEquals(inputRecipeDto.getDescription(), entity.getDescription());
-        assertEquals(inputRecipeDto.getRecipeType().name(), entity.getRecipeType());
+        assertEquals(inputRecipeDto.getName(), entity.getName());
+        assertEquals(inputRecipeDto.getType().name(), entity.getType());
         assertEquals(inputRecipeDto.getInstructions(), entity.getInstructions());
         assertEquals(inputRecipeDto.getServings(), entity.getServings());
 
@@ -73,7 +73,7 @@ class RecipeMapperTest {
 
         // then the fields are mapped correctly
         assertEquals(recipe.getId(), result.getId());
-        assertEquals(recipe.getDescription(), result.getDescription());
+        assertEquals(recipe.getName(), result.getName());
     }
 
     @DisplayName("Recipe entities are mapped successfully to list of recipe dtos")
@@ -88,13 +88,13 @@ class RecipeMapperTest {
 
         // then the fields are mapped correctly
         assertEquals(recipes.get(0).getId(), result.get(0).getId());
-        assertEquals(recipes.get(0).getDescription(), result.get(0).getDescription());
+        assertEquals(recipes.get(0).getName(), result.get(0).getName());
     }
 
     private InputRecipeDto createInputRecipeDto() {
         var inputRecipeDto = new InputRecipeDto();
-        inputRecipeDto.setRecipeType(RecipeType.VEGETARIAN);
-        inputRecipeDto.setDescription("French fries");
+        inputRecipeDto.setType(RecipeType.VEGETARIAN);
+        inputRecipeDto.setName("French fries");
         inputRecipeDto.setInstructions("Just do it!");
         inputRecipeDto.setServings(3);
 
@@ -109,8 +109,8 @@ class RecipeMapperTest {
     private Recipe createRecipeEntity() {
         var recipe = new Recipe();
         recipe.setId(UUID.randomUUID());
-        recipe.setDescription("Fries");
-        recipe.setRecipeType(RecipeType.VEGETARIAN.toString());
+        recipe.setName("Fries");
+        recipe.setType(RecipeType.VEGETARIAN.toString());
 
         return recipe;
     }

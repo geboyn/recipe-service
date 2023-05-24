@@ -10,7 +10,8 @@ import lombok.Getter;
 @Getter
 public enum Errors {
     RECIPE_NOT_FOUND("RS_001", "Could not find recipe"),
-    INVALID_RECIPE_TYPE("RS_002", "Invalid recipe type. Supported types are: " + Arrays.toString(RecipeType.values()));
+    INVALID_RECIPE_TYPE("RS_002", "Invalid recipe type. Supported types are: " + Arrays.toString(RecipeType.values())),
+    INVALID_PARAMETER("RS_003", "Invalid parameter");
 
     private final String errorCode;
     private final String message;

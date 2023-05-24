@@ -1,8 +1,8 @@
 create TABLE t_recipe
 (
     id uuid NOT NULL,
-    description character varying(255),
-    recipe_type character varying(255),
+    name character varying(255),
+    type character varying(255),
     instructions character varying(4000),
     number_of_servings integer,
     CONSTRAINT t_recipes_pkey PRIMARY KEY (id)

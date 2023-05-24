@@ -1,7 +1,7 @@
 [
   {
-    "description": "steak",
-    "recipeType": "steak lovers",
+    "name": "steak",
+    "type": "steak lovers",
     "instructions": "Just Do it!",
     "numberOfServings": 4,
     "ingredients": [
