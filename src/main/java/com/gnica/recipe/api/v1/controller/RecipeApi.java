@@ -45,11 +45,11 @@ public interface RecipeApi {
             })
     @GetMapping("/recipes")
     ResponseEntity<List<RecipeDto>> allRecipes(
-            @RequestParam(required = false) RecipeType type,
-            @RequestParam(required = false) Integer servings,
-            @RequestParam(required = false) String instructions,
-            @RequestParam(required = false) Set<String> ingredients,
-            @RequestParam(required = false) Set<String> ingredientsExclude);
+            @RequestParam(required = false, name = "type") RecipeType type,
+            @RequestParam(required = false, name = "servings") Integer servings,
+            @RequestParam(required = false, name = "instructions") String instructions,
+            @RequestParam(required = false, name = "ingredients") Set<String> ingredients,
+            @RequestParam(required = false, name = "ingredientsExclude") Set<String> ingredientsExclude);
 
     /**
      * get recipe by id
@@ -70,7 +70,7 @@ public interface RecipeApi {
                         content = @Content(schema = @Schema(implementation = RecipeDto.class)))
             })
     @GetMapping("/recipes/{id}")
-    ResponseEntity<RecipeDto> getRecipe(@PathVariable UUID id);
+    ResponseEntity<RecipeDto> getRecipe(@PathVariable(name = "id") UUID id);
 
     /**
      * save recipe
@@ -117,7 +117,8 @@ public interface RecipeApi {
                         content = @Content(schema = @Schema(implementation = ApiError.class)))
             })
     @PutMapping("/recipes/{id}")
-    ResponseEntity<RecipeDto> updateRecipe(@PathVariable UUID id, @RequestBody InputRecipeDto inputRecipeDto);
+    ResponseEntity<RecipeDto> updateRecipe(
+            @PathVariable(name = "id") UUID id, @RequestBody InputRecipeDto inputRecipeDto);
 
     /**
      * delete recipe by id
@@ -132,5 +133,5 @@ public interface RecipeApi {
                 @ApiResponse(responseCode = "404", description = "recipe not found")
             })
     @DeleteMapping("/recipes/{id}")
-    ResponseEntity<Void> deleteRecipe(@PathVariable UUID id);
+    ResponseEntity<Void> deleteRecipe(@PathVariable(name = "id") UUID id);
 }

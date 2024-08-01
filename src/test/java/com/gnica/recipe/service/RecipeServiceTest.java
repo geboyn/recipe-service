@@ -213,7 +213,7 @@ class RecipeServiceTest {
                 .build();
 
         var recipesWithFriesWithoutCheese = recipeService.filterRecipes(withFriesWithoutCheese);
-        assertEquals(2, vegetarianRecipes.size());
+        assertEquals(2, recipesWithFriesWithoutCheese.size());
     }
 
     private void saveRecipes() throws IOException {
