@@ -16,7 +16,7 @@ an in memory database (h2) and for the advanced filtering I chose Spring Jpa Spe
   - ```mvn clean install ```
 - run:
   - ```cd target && java -jar recipe-0.0.1-SNAPSHOT.jar --spring.profiles.active=local```
-  OR
+    OR
   - ```mvn spring-boot:run -Dspring-boot.run.profiles=local```
 - run with docker:
   - build image ```docker build . -t recipe-service```
