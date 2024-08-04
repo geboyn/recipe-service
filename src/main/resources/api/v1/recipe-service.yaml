@@ -1,0 +1,224 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+tags:
+  - name: Recipe
+    description: Recipe management API
+paths:
+  /recipes/{id}:
+    get:
+      tags:
+        - Recipe
+      summary: Get recipe by id
+      operationId: getRecipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: recipe found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RecipeDto'
+        '404':
+          description: recipe not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+    put:
+      tags:
+        - Recipe
+      summary: Update existing recipe
+      operationId: updateRecipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputRecipeDto'
+        required: true
+      responses:
+        '200':
+          description: Saved new recipes
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/RecipeDto'
+        '400':
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        '404':
+          description: Recipe not found
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+    delete:
+      tags:
+        - Recipe
+      summary: delete an existing recipe
+      operationId: deleteRecipe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '202':
+          description: recipe deleted
+        '404':
+          description: recipe not found
+  /recipes:
+    get:
+      tags:
+        - Recipe
+      summary: Filter recipes
+      operationId: allRecipes
+      parameters:
+        - name: type
+          in: query
+          schema:
+            $ref: '#/components/schemas/RecipeType'
+        - name: servings
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: instructions
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: ingredients
+          in: query
+          required: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+        - name: ingredientsExclude
+          in: query
+          required: false
+          schema:
+            uniqueItems: true
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: list of recipes filtered or empty list if none match the filtering criteria
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipeDto'
+    post:
+      tags:
+        - Recipe
+      summary: Save new recipes
+      operationId: saveRecipes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/InputRecipeDto'
+        required: true
+      responses:
+        '200':
+          description: Saved new recipes
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RecipeDto'
+        '400':
+          description: Bad request
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/ApiError'
+components:
+  schemas:
+    RecipeType:
+      type: string
+      enum:
+        - STANDARD
+        - VEGETARIAN
+        - VEGAN
+    IngredientDto:
+      type: object
+      properties:
+        name:
+          type: string
+        quantity:
+          type: string
+    RecipeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        type:
+          type: string
+        instructions:
+          type: string
+        servings:
+          type: integer
+          format: int32
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngredientDto'
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+    InputRecipeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/RecipeType'
+        instructions:
+          type: string
+        servings:
+          type: integer
+          format: int32
+        ingredients:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/IngredientDto'

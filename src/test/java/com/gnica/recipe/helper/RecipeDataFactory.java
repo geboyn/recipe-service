@@ -1,8 +1,8 @@
 package com.gnica.recipe.helper;
 
-import com.gnica.recipe.dto.IngredientDto;
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeType;
+import com.gnica.recipe.model.IngredientDto;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeType;
 import java.util.Set;
 
 public class RecipeDataFactory {

@@ -1,8 +1,8 @@
 package com.gnica.recipe.mapper;
 
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeDto;
 import com.gnica.recipe.entity.Recipe;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeDto;
 import java.util.List;
 import org.mapstruct.Mapper;
 

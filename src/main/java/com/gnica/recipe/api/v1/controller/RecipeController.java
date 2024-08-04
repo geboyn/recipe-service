@@ -1,8 +1,9 @@
 package com.gnica.recipe.api.v1.controller;
 
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeDto;
-import com.gnica.recipe.dto.RecipeType;
+import com.gnica.recipe.RecipesApi;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeDto;
+import com.gnica.recipe.model.RecipeType;
 import com.gnica.recipe.search.SearchRequest;
 import com.gnica.recipe.service.RecipeService;
 import java.util.List;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class RecipeController implements RecipeApi {
+public class RecipeController implements RecipesApi {
 
     private final RecipeService recipeService;
 

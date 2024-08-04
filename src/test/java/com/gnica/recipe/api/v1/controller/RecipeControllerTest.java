@@ -11,9 +11,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnica.recipe.dto.RecipeDto;
 import com.gnica.recipe.helper.RecipeDataFactory;
 import com.gnica.recipe.mapper.RecipeMapper;
+import com.gnica.recipe.model.RecipeDto;
 import com.gnica.recipe.service.RecipeService;
 import java.util.List;
 import java.util.UUID;

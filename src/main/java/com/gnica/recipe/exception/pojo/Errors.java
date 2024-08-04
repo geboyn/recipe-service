@@ -1,6 +1,6 @@
 package com.gnica.recipe.exception.pojo;
 
-import com.gnica.recipe.dto.RecipeType;
+import com.gnica.recipe.model.RecipeType;
 import java.util.Arrays;
 import lombok.Getter;
 

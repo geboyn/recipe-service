@@ -21,9 +21,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, ex.getHttpStatus());
     }
 
-    @ExceptionHandler({InvalidRecipeException.class})
-    public ResponseEntity<ApiError> handleInvalidRecipeException(InvalidRecipeException ex, WebRequest webRequest) {
-        var apiError = new ApiError(ex.getMessage(), ex.getName());
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity<ApiError> handleInvalidRecipeException(IllegalArgumentException ex, WebRequest webRequest) {
+        var apiError = new ApiError(ex.getMessage(), Errors.INVALID_PARAMETER.getErrorCode());
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 

@@ -1,7 +1,7 @@
 [
   {
     "name": "hamburger",
-    "type": "standard",
+    "type": "STANDARD",
     "instructions": "Put in the microwave for 3 minutes at 700W",
     "servings": 4,
     "ingredients": [
@@ -33,7 +33,7 @@
   },
   {
     "name": "Meat plate",
-    "type": "Standard",
+    "type": "STANDARD",
     "instructions": "Put everything on the plate",
     "servings": 3,
     "ingredients": [

@@ -1,8 +1,8 @@
 package com.gnica.recipe.repository;
 
-import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.entity.Ingredient;
 import com.gnica.recipe.entity.Recipe;
+import com.gnica.recipe.model.RecipeType;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Path;

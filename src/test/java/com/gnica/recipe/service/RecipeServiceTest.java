@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gnica.recipe.dto.IngredientDto;
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeDto;
-import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.exception.RecipeNotFoundException;
+import com.gnica.recipe.model.IngredientDto;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeDto;
+import com.gnica.recipe.model.RecipeType;
 import com.gnica.recipe.repository.RecipeRepository;
 import com.gnica.recipe.search.SearchRequest;
 import java.io.IOException;

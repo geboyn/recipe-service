@@ -73,6 +73,11 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -92,6 +97,37 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.gnica.recipe.RecipeApplication</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.7.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/api/v1/recipe-service.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <sourceFolder>src/java</sourceFolder>
+                                <useSpringBoot3>true</useSpringBoot3>
+                                <asyncNative>true</asyncNative>
+                                <useJakartaEe>true</useJakartaEe>
+                                <generateSupportingFiles>true</generateSupportingFiles>
+                                <additionalModelTypeAnnotations>@lombok.Data @lombok.Builder @lombok.NoArgsConstructor @lombok.AllArgsConstructor</additionalModelTypeAnnotations>
+                                <interfaceOnly>true</interfaceOnly>
+                            </configOptions>
+                            <apiPackage>com.gnica.recipe</apiPackage>
+                            <packageName>com.gnica.recipe</packageName>
+                            <modelPackage>com.gnica.recipe.model</modelPackage>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -148,6 +184,9 @@
                 <version>2.43.0</version>
                 <configuration>
                     <java>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                        </excludes>
                         <toggleOffOn/>
                         <importOrder/>
                         <removeUnusedImports/>
@@ -165,6 +204,9 @@
                         <includes>
                             <include>**/*.md</include>
                         </includes>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                        </excludes>
                         <flexmark/>
                     </markdown>
                     <pom>

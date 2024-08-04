@@ -1,6 +1,6 @@
 package com.gnica.recipe.search;
 
-import com.gnica.recipe.dto.RecipeType;
+import com.gnica.recipe.model.RecipeType;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Data;

@@ -7,11 +7,11 @@ import static com.gnica.recipe.repository.RecipeRepository.Specifications.withIn
 import static com.gnica.recipe.repository.RecipeRepository.Specifications.withRecipeType;
 import static com.gnica.recipe.repository.RecipeRepository.Specifications.withServings;
 
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeDto;
 import com.gnica.recipe.entity.Recipe;
 import com.gnica.recipe.exception.RecipeNotFoundException;
 import com.gnica.recipe.mapper.RecipeMapper;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeDto;
 import com.gnica.recipe.repository.RecipeRepository;
 import com.gnica.recipe.search.SearchRequest;
 import jakarta.transaction.Transactional;

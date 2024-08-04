@@ -3,11 +3,11 @@ package com.gnica.recipe.mapper;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.gnica.recipe.dto.IngredientDto;
-import com.gnica.recipe.dto.InputRecipeDto;
-import com.gnica.recipe.dto.RecipeType;
 import com.gnica.recipe.entity.Ingredient;
 import com.gnica.recipe.entity.Recipe;
+import com.gnica.recipe.model.IngredientDto;
+import com.gnica.recipe.model.InputRecipeDto;
+import com.gnica.recipe.model.RecipeType;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
