@@ -69,7 +69,7 @@ public class RecipeService {
     @Transactional
     public List<RecipeDto> filterRecipes(SearchRequest searchRequest) {
 
-        Specification<Recipe> specs = Specification.where(withIngredients(searchRequest.getIngredients()))
+        Specification<Recipe> specs = Specification.allOf(withIngredients(searchRequest.getIngredients()))
                 .and(doesNotContainIngredients(searchRequest.getIngredientsToExclude()))
                 .and(withRecipeType(searchRequest.getRecipeType()))
                 .and(withServings(searchRequest.getServings()))
